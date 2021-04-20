@@ -2,6 +2,20 @@
 
 {% block content %}
 
-<h1>Hello World!!! This is my new Weather APP.</h1>
+<h1>Weather APP</h1>
+<br>
+<!--{{ api }}-->
+
+{% if api %}
+    {% if api == "Error..." %}
+        <p>There was an error, please try again ....</p>
+    {% else %}
+        <strong><i>Air Quality:</i></strong> {{ api.0.AQI }}<br>
+        <strong><i>Area:</i></strong> {{ api.0.AQI }}<br>
+        <strong><i>Latitude:</i></strong> {{ api.0.Latitude }}<br>
+        <strong><i>Longitude:</i></strong> {{ api.0.Longitude }}<br>
+        <strong><i>Category:</i></strong> {{ api.0.Category.Name }}<br>
+    {% endif %}
+{% endif %}
 
 {% endblock %}
