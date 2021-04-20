@@ -2,7 +2,6 @@
 
 {% block content %}
 
-<h1>Weather APP</h1>
 <br>
 <!--{{ api }}-->
 
@@ -10,11 +9,28 @@
     {% if api == "Error..." %}
         <p>There was an error, please try again ....</p>
     {% else %}
-        <strong><i>Air Quality:</i></strong> {{ api.0.AQI }}<br>
-        <strong><i>Area:</i></strong> {{ api.0.AQI }}<br>
-        <strong><i>Latitude:</i></strong> {{ api.0.Latitude }}<br>
-        <strong><i>Longitude:</i></strong> {{ api.0.Longitude }}<br>
-        <strong><i>Category:</i></strong> {{ api.0.Category.Name }}<br>
+        <div class="jumbotron container good">
+            <h1 class="display-4">{{ api.0.ReportingArea }} - {{ api.0.AQI }} ({{ api.0.Category.Name }})</h1>
+            <p class="lead">Current {{ api.0.ReportingArea }} air quality is {{ api.0.AQI }}.</p>
+            <hr class="my-4">
+            <p>Latitude : {{ api.0.Latitude }} | Longitude : {{ api.0.Longitude }}</p>
+            <hr class="my-4">
+            <p>
+                {% if api.0.Category.Name == "Good" %}
+                    <p>(0 - 50) Air Quality is cosidered satisfactory, and air pollution poses little or no risk.</p>
+                {% elif api.0.Category.Name == "Moderate" %}
+                    <p>(51 - 100) Air quality is Moderate</p>
+                {% elif api.0.Category.Name == "Unhealthy for Sensitive Groups" %}
+                    <p>(101 - 150) Air quality is Unhealthy for Sensitive Groups</p>
+                {% elif api.0.Category.Name == "Unhealthy" %}
+                    <p>(151 - 200) Air quality is Unhealthy</p>
+                {% elif api.0.Category.Name == "Very Unhealthy" %}
+                    <p>(201 - 250) Air quality is Very Unhealthy</p>
+                {% elif api.0.Category.Name == "Hazardous" %}
+                    <p>(251 - 300) Air quality is Hazardous</p>
+                {% endif %}
+            </p>
+        </div>
     {% endif %}
 {% endif %}
 
