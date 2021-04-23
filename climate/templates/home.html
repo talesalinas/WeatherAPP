@@ -3,7 +3,10 @@
 {% block content %}
 
 <br>
-<!--{{ api }}-->
+
+{% if zipcode %}
+    {{ zipcode }}
+{% endif %}
 
 {% if api %}
     {% if api == "Error..." %}
